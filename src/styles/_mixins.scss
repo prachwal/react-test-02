@@ -1,0 +1,9 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+@mixin apply-theme($theme-name) {
+  $theme: map.get($themes, $theme-name);
+  @each $property, $value in $theme {
+    --#{$property}: #{$value};
+  }
+}

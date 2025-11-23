@@ -1,0 +1,21 @@
+.button {
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--button-hover-color);
+  }
+  &:active {
+    background-color: var(--button-active-color);
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+  }
+}

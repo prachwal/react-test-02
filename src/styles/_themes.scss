@@ -1,0 +1,13 @@
+@use 'mixins' as *;
+
+:root {
+  @include apply-theme(light);
+}
+
+[data-theme='light'] {
+  @include apply-theme(light);
+}
+
+[data-theme='dark'] {
+  @include apply-theme(dark);
+}

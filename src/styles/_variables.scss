@@ -1,0 +1,24 @@
+$themes: (
+  light: (
+    text-color: #333,
+    background-color: #f9f9f9,
+    primary-color: #3498db,
+    secondary-color: #2ecc71,
+    tertiary-color: #e74c3c,
+    button-color: #3498db,
+    button-text-color: #fff,
+    button-hover-color: #1abc9c,
+    button-active-color: #e67e22
+  ),
+  dark: (
+    text-color: #eee,
+    background-color: #121212,
+    primary-color: #2980b9,
+    secondary-color: #27ae60,
+    tertiary-color: #c0392b,
+    button-color: #2980b9,
+    button-text-color: #eee,
+    button-hover-color: #16a085,
+    button-active-color: #d35400
+  )
+);
