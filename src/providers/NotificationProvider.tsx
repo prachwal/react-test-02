@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'preact/compat';
+import type { ComponentChildren } from 'preact';
 import {
   type NotificationPosition,
   type LogEntry,
@@ -17,24 +18,24 @@ const NotificationContext = createContext<NotificationContextValue | undefined>(
 
 export const useNotification = () => {
   const context = useContext(NotificationContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useNotification must be used within NotificationProvider');
   }
   return context;
 };
 
 export interface NotificationProviderProps {
-  children: React.ReactNode;
   position?: NotificationPosition;
   maxEntries?: number;
   defaultDuration?: number;
+  children?: ComponentChildren;
 }
 
 export function NotificationProvider({
-  children,
   position = 'bottom-right',
   maxEntries = DEFAULT_MAX_ENTRIES,
   defaultDuration = DEFAULT_DURATION,
+  children,
 }: NotificationProviderProps) {
   const [logs, setLogs] = useState<LogEntry[]>([]);
 

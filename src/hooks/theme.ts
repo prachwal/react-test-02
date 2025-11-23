@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-import type { ThemeType } from '../types';
-import { getNextTheme, isValidTheme } from '../types';
 import { notification } from '../components';
+import { useEffect, useState } from 'preact/hooks';
+import { type ThemeType, isValidTheme, getNextTheme } from '../types';
 
 
 const THEME_STORAGE_KEY = 'theme';

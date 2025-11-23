@@ -20,16 +20,13 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "preact": "^10.27.2"
   },
   "type": "module",
   "devDependencies": {
-    "@types/react": "^19.2.6",
-    "@types/react-dom": "^19.2.3",
+    "@preact/preset-vite": "^2.10.2",
     "@typescript-eslint/eslint-plugin": "^8.47.0",
     "@typescript-eslint/parser": "^8.47.0",
-    "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",

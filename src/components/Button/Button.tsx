@@ -1,4 +1,3 @@
-import type React from 'react';
 import './Button.scss';
 
 export type ButtonProps = {

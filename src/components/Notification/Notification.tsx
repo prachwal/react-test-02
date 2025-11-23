@@ -1,4 +1,6 @@
-import { useState, useEffect, useCallback, type ReactNode } from 'react';
+
+import type { ReactNode } from 'preact/compat';
+import { useState, useCallback, useEffect } from 'preact/hooks';
 import './Notification.scss';
 import { notification, type LogLevel, type LogEntry, type NotificationPosition, DEFAULT_MAX_ENTRIES, DEFAULT_DURATION } from './notification';
 
