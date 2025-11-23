@@ -1,69 +1,87 @@
-import { useEffect, useState } from "react";
-import { getNextTheme, RealThemeType, ThemeType } from "../types";
+import { useEffect, useState } from 'react';
+import type { ThemeType } from '../types';
+import { getNextTheme, isValidTheme } from '../types';
+import { notification } from '../components';
+
+
+const THEME_STORAGE_KEY = 'theme';
+const DEFAULT_THEME: ThemeType = 'light';
+
+/**
+ * Bezpieczne odczytanie motywu z localStorage z walidacją
+ */
+function getStoredTheme(): ThemeType {
+  try {
+    const stored = localStorage.getItem(THEME_STORAGE_KEY);
+    if (stored !== null && isValidTheme(stored)) {
+      return stored as ThemeType;
+    }
+  } catch (error) {
+    notification.warn(`Failed to read theme from localStorage: ${error}`);
+  }
+  return DEFAULT_THEME;
+}
+
+/**
+ * Bezpieczny zapis motywu do localStorage
+ */
+function setStoredTheme(theme: ThemeType): void {
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+  } catch (error) {
+    notification.error(`Failed to save theme to localStorage: ${error}`);
+  }
+}
+
+/**
+ * Określa efektywny motyw (light/dark) na podstawie preferencji
+ */
+function getEffectiveTheme(themeType: ThemeType): 'light' | 'dark' {
+  if (themeType === 'auto') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  return themeType;
+}
 
 export function UseThemeSwitcher() {
-  const [theme, setTheme] = useState<ThemeType>("light");
+  const [theme, setTheme] = useState<ThemeType>(getStoredTheme);
 
-  // Funkcja pomocnicza do określania aktualnego motywu na podstawie preferencji systemowych
-  const getEffectiveTheme = (themeType: ThemeType): RealThemeType => {
-    if (themeType === "auto") {
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      return prefersDark ? "dark" : "light";
-    }
-    return themeType;
-  };
-
+  // Efekt dla obsługi zmian motywu systemowego
   useEffect(() => {
-    // Sprawdzenie preferencji początkowo - z localStorage lub systemowych
-    const savedTheme = localStorage.getItem("theme") as ThemeType | null;
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-    // Użyj zapisanej preferencji lub domyślnej (light)
-    setTheme(savedTheme || "light");
-
-    // Nasłuchiwanie na zmiany preferencji systemowych
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const handleSystemThemeChange = (_e: MediaQueryListEvent) => {
-      const savedTheme = localStorage.getItem("theme") as ThemeType | null;
-      // Jeśli użytkownik ma ustawiony tryb auto lub brak zapisanej preferencji, podążaj za systemem
-      if (savedTheme === "auto" || !savedTheme) {
-        setTheme("auto");
-      }
+    const handleSystemThemeChange = () => {
+      // Reaguj tylko gdy aktualny motyw to 'auto'
+      setTheme(current => {
+        if (current === 'auto') {
+          // Wymuszenie re-renderu przez zmianę referencji
+          return 'auto';
+        }
+        return current;
+      });
     };
 
-    // Obsługa zmian (nowoczesna)
-    mediaQuery.addEventListener("change", handleSystemThemeChange);
-
-    // Obsługa zmian (legacy dla starszych przeglądarek)
-    if (mediaQuery.addListener) {
-      mediaQuery.addListener(handleSystemThemeChange);
-    }
-
-    // Cleanup
-    return () => {
-      mediaQuery.removeEventListener("change", handleSystemThemeChange);
-      if (mediaQuery.removeListener) {
-        mediaQuery.removeListener(handleSystemThemeChange);
-      }
-    };
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
   }, []);
 
+  // Efekt dla aplikacji motywu i zapisywania do localStorage
   useEffect(() => {
-    // Ustaw atrybut data-theme na elemencie HTML z uwzględnieniem trybu auto
     const effectiveTheme = getEffectiveTheme(theme);
-    document.documentElement.setAttribute("data-theme", effectiveTheme);
+    document.documentElement.setAttribute('data-theme', effectiveTheme);
+    setStoredTheme(theme);
 
-    // Zapisz w localStorage
-    localStorage.setItem("theme", theme);
-
-    console.log("Theme set to:", theme, "(effective:", effectiveTheme + ")");
+    notification.info(`Theme: ${theme}${theme === 'auto' ? ` (${effectiveTheme})` : ''}`);
   }, [theme]);
 
-  function nextTheme(theme: ThemeType): ThemeType {
-    return getNextTheme(theme);
-  }
+  const nextTheme = (currentTheme: ThemeType): ThemeType => {
+    return getNextTheme(currentTheme);
+  };
 
-  return { theme, setTheme, nextTheme };
+  return {
+    theme,
+    setTheme,
+    nextTheme,
+    effectiveTheme: getEffectiveTheme(theme)
+  };
 }

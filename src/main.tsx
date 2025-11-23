@@ -1,10 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { App } from './App'
-import './styles/index.scss'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { App } from './app';
+import './styles/index.scss';
+import { NotificationProvider } from './providers/NotificationProvider';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
-)
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Failed to find the root element');
+}
+
+ReactDOM.createRoot(rootElement).render(
+  <React.StrictMode>
+    <NotificationProvider>
+      <App />
+    </NotificationProvider>
+  </React.StrictMode>
+);
