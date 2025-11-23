@@ -7,3 +7,38 @@
     --#{$property}: #{$value};
   }
 }
+
+@mixin border-radius($min, $fluid, $max) {
+  border-radius: clamp(#{$min}, #{$fluid}, #{$max});
+}
+
+@mixin border-radius-none {
+  border-radius: 0;
+}
+
+@mixin border-radius-small {
+  border-radius: clamp(2px, 1vw, 3px);
+}
+
+@mixin border-radius-medium {
+  border-radius: clamp(3px, 1.5vw, 4px);
+}
+
+@mixin border-radius-large {
+  border-radius: clamp(4px, 2vw, 6px);
+}
+
+@mixin button-size-small {
+  padding: clamp(0.3rem, 1.5vw, 0.4rem) clamp(0.6rem, 2.5vw, 0.7rem);
+  font-size: clamp(0.8rem, 3vw, 0.9rem);
+}
+
+@mixin button-size-medium {
+  padding: clamp(0.4rem, 2vw, 0.5rem) clamp(0.8rem, 3vw, 1rem);
+  font-size: inherit;
+}
+
+@mixin button-size-large {
+  padding: clamp(0.5rem, 2.5vw, 0.6rem) clamp(1rem, 3.5vw, 1.2rem);
+  font-size: clamp(1.1rem, 4vw, 1.2rem);
+}

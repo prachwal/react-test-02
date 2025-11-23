@@ -1,20 +1,76 @@
 $themes: (
   light: (
-    text-color: #333,
-    background-color: #f9f9f9,
-    primary-color: #3498db,
-    button-color: #3498db,
-    button-text-color: #fff,
-    button-hover-color: #1abc9c,
-    button-active-color: #e67e22
+    // Kolory bazowe
+    text-color: #1e293b,
+    background-color: #f8fafc,
+    surface-color: #ffffff,
+
+    // Primary - nowoczesny indygo
+    primary-color: #6366f1,
+    primary-hover-color: #4f46e5,
+    primary-light: #e0e7ff,
+
+    // Secondary - ciepły fiolet
+    secondary-color: #8b5cf6,
+    secondary-hover-color: #7c3aed,
+
+    // Akcenty semantyczne
+    success-color: #10b981,
+    success-hover-color: #059669,
+    warning-color: #f59e0b,
+    warning-hover-color: #d97706,
+    danger-color: #ef4444,
+    danger-hover-color: #dc2626,
+
+    // Neutralne
+    gray-50: #f9fafb,
+    gray-100: #f3f4f6,
+    gray-200: #e5e7eb,
+    gray-300: #d1d5db,
+    gray-600: #4b5563,
+    gray-700: #374151,
+
+    // Przyciski
+    button-color: #6366f1,
+    button-text-color: #ffffff,
+    button-hover-color: #4f46e5,
+    button-active-color: #4338ca
   ),
   dark: (
-    text-color: #eee,
-    background-color: #121212,
-    primary-color: #2980b9,
-    button-color: #2980b9,
-    button-text-color: #eee,
-    button-hover-color: #16a085,
-    button-active-color: #d35400
+    // Kolory bazowe
+    text-color: #e2e8f0,
+    background-color: #0f172a,
+    surface-color: #1e293b,
+
+    // Primary - jaśniejszy dla lepszego kontrastu
+    primary-color: #818cf8,
+    primary-hover-color: #6366f1,
+    primary-light: #312e81,
+
+    // Secondary
+    secondary-color: #a78bfa,
+    secondary-hover-color: #8b5cf6,
+
+    // Akcenty semantyczne - dostosowane do dark mode
+    success-color: #34d399,
+    success-hover-color: #10b981,
+    warning-color: #fbbf24,
+    warning-hover-color: #f59e0b,
+    danger-color: #f87171,
+    danger-hover-color: #ef4444,
+
+    // Neutralne dla dark theme
+    gray-50: #1e293b,
+    gray-100: #334155,
+    gray-200: #475569,
+    gray-300: #64748b,
+    gray-600: #cbd5e1,
+    gray-700: #e2e8f0,
+
+    // Przyciski
+    button-color: #818cf8,
+    button-text-color: #f8fafc,
+    button-hover-color: #6366f1,
+    button-active-color: #4f46e5
   )
 );

@@ -3,45 +3,45 @@
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
   pointer-events: none;
   max-width: min(400px, calc(100vw - 3rem));
 
   // Pozycje w rogach
   &--top-left {
-    top: 1.5rem;
-    left: 1.5rem;
+    top: clamp(1rem, 3vw, 1.5rem);
+    left: clamp(1rem, 3vw, 1.5rem);
     align-items: flex-start;
   }
 
   &--top-right {
-    top: 1.5rem;
-    right: 1.5rem;
+    top: clamp(1rem, 3vw, 1.5rem);
+    right: clamp(1rem, 3vw, 1.5rem);
     align-items: flex-end;
   }
 
   &--bottom-left {
-    bottom: 1.5rem;
-    left: 1.5rem;
+    bottom: clamp(1rem, 3vw, 1.5rem);
+    left: clamp(1rem, 3vw, 1.5rem);
     align-items: flex-start;
   }
 
   &--bottom-right {
-    bottom: 1.5rem;
-    right: 1.5rem;
+    bottom: clamp(1rem, 3vw, 1.5rem);
+    right: clamp(1rem, 3vw, 1.5rem);
     align-items: flex-end;
   }
 
   // Pozycje na środku
   &--top-center {
-    top: 1.5rem;
+    top: clamp(1rem, 3vw, 1.5rem);
     left: 50%;
     transform: translateX(-50%);
     align-items: center;
   }
 
   &--bottom-center {
-    bottom: 1.5rem;
+    bottom: clamp(1rem, 3vw, 1.5rem);
     left: 50%;
     transform: translateX(-50%);
     align-items: center;
@@ -50,15 +50,15 @@
   &__entry {
     width: 100%;
     min-width: 320px;
-    padding: 1rem;
-    border-radius: 8px;
+    padding: clamp(0.8rem, 2.5vw, 1rem);
+    border-radius: clamp(6px, 2vw, 8px);
     box-shadow:
       0 4px 12px rgba(0, 0, 0, 0.15),
       0 0 0 1px rgba(0, 0, 0, 0.05);
     backdrop-filter: blur(10px);
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: clamp(0.5rem, 2vw, 0.75rem);
     position: relative;
     overflow: hidden;
     pointer-events: auto;
@@ -70,7 +70,7 @@
       left: 0;
       top: 0;
       bottom: 0;
-      width: 4px;
+      width: clamp(3px, 1vw, 4px);
     }
 
     &:hover {
